@@ -34,9 +34,11 @@ class TestMain(unittest.TestCase):
 
     @mock.patch('ipmonitor.monitor.Monitor.start')
     @mock.patch('ipmonitor.main.signal.pause')
+    @mock.patch('ipmonitor.config_manager.ConfigManager.load_cfg')
     @mock.patch('ipmonitor.config_manager.ConfigManager.get_monitors')
     @mock.patch('ipmonitor.main.get_monitor')
-    def test_main(self, mock_get, mock_get_monitors, mock_pause, mock_start):
+    def test_main(self, mock_get, mock_get_monitors, mock_load, mock_pause,
+                  mock_start):
         mock_get_monitors.return_value = MOCK_CFG['monitor']
         from ipmonitor.main import main as test_main
         mock_pause.side_effect = KeyboardInterrupt("Mock Keyboard Interrupt")

@@ -35,7 +35,7 @@ class TestIpify(unittest.TestCase):
 
     def test_url(self):
         self.assertTrue('ipify' in self.ipify.URL)
-        
+
 
 class TestParserFactory(unittest.TestCase):
 
@@ -47,16 +47,17 @@ class TestParserFactory(unittest.TestCase):
 
     def test_create_ipify(self):
         parser = ParserFactory.create('ipify')
-        self.assertEqual(type(parser), Ipify)   
+        self.assertEqual(type(parser), Ipify)
 
         parser = ParserFactory.create('ipify', 'extraarg')
-        self.assertEqual(type(parser), Ipify)   
+        self.assertEqual(type(parser), Ipify)
 
         parser = ParserFactory.create('ipify', extrakwarg='test')
-        self.assertEqual(type(parser), Ipify)   
+        self.assertEqual(type(parser), Ipify)
 
         parser = ParserFactory.create('ipify', 'extraarg', extrakwarg='test')
-        self.assertEqual(type(parser), Ipify)   
+        self.assertEqual(type(parser), Ipify)
 
     def test_create_bad_parser(self):
-        self.assertRaises(RuntimeError, ParserFactory.create, 'FooBarFakeParser')
+        self.assertRaises(RuntimeError, ParserFactory.create,
+                          'FooBarFakeParser')
