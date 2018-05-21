@@ -1,0 +1,13 @@
+monitors:
+  - parser: ipify
+    notifiers:
+      - name: stdout
+      - name: groupme
+        bot_id: <GROUPME_BOT_ID_HERE>
+      - name: email
+        email: <EMAIL_RECIPIENT_HERE>
+        smtp_server: 'smtp.gmail.com'
+        smtp_port: 587
+        smtp_username: <LOGIN_EMAIL_HERE>
+        smtp_password: <SMTP_PASSWORD_HERE>
+    sleep_time: 600

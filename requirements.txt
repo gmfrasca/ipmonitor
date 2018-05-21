@@ -1,0 +1,5 @@
+flake8==3.3.0
+requests
+pyyaml
+email
+
