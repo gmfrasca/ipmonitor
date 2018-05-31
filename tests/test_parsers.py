@@ -1,6 +1,7 @@
 from ipmonitor.parsers.base import BaseParser
 from ipmonitor.parsers.ipify import Ipify
 from ipmonitor.parsers.parser_factory import ParserFactory
+from requests.exceptions import ConnectionError
 import unittest
 import mock
 
@@ -32,6 +33,12 @@ class TestIpify(unittest.TestCase):
     def test_get_ip(self, mock_get):
         mock_get.return_value = TestIpify.MockIpifyResponse()
         self.assertEqual(self.ipify.get_ip(), '1.2.3.4')
+
+    @mock.patch('ipmonitor.parsers.ipify.get')
+    def test_get_ip_connection_error(self, mock_get):
+        mock_get.return_value = TestIpify.MockIpifyResponse()
+        mock_get.side_effect = ConnectionError
+        self.assertEqual(self.ipify.get_ip(), 'ConnectionError')
 
     def test_url(self):
         self.assertTrue('ipify' in self.ipify.URL)
